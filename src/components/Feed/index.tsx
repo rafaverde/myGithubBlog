@@ -1,60 +1,31 @@
+import { useContext } from "react"
 import { FeedContainer, PostCard } from "./styles"
+import { BlogContext } from "../../contexts/BlogContext"
+import Markdown from "react-markdown"
 
 export function Feed() {
+  const { posts } = useContext(BlogContext)
+
+  function trimPostBody(str: string, limit: number) {
+    if (str.length > limit) {
+      return str.substring(0, limit) + "..."
+    } else {
+      return str
+    }
+  }
+
   return (
     <FeedContainer>
-      <PostCard>
-        <header>
-          <h1>Javascript data types and datas structure</h1>
-          <span>Há 1 dia</span>
-        </header>
+      {posts.map((post) => (
+        <PostCard key={post.issueNumber}>
+          <header>
+            <h1>{post.title}</h1>
+            <span>{post.createdAt}</span>
+          </header>
 
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quos
-          dolore, unde tempore sequi deleniti aspernatur assumenda. Enim
-          corporis, molestias fugit quia qui adipisci libero ad! Labore quis
-          fuga odio.
-        </p>
-      </PostCard>
-      <PostCard>
-        <header>
-          <h1>Javascript data types and datas structure</h1>
-          <span>Há 1 dia</span>
-        </header>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quos
-          dolore, unde tempore sequi deleniti aspernatur assumenda. Enim
-          corporis, molestias fugit quia qui adipisci libero ad! Labore quis
-          fuga odio.
-        </p>
-      </PostCard>
-      <PostCard>
-        <header>
-          <h1>Javascript data types and datas structure</h1>
-          <span>Há 1 dia</span>
-        </header>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quos
-          dolore, unde tempore sequi deleniti aspernatur assumenda. Enim
-          corporis, molestias fugit quia qui adipisci libero ad! Labore quis
-          fuga odio.
-        </p>
-      </PostCard>
-      <PostCard>
-        <header>
-          <h1>Javascript data types and datas structure</h1>
-          <span>Há 1 dia</span>
-        </header>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quos
-          dolore, unde tempore sequi deleniti aspernatur assumenda. Enim
-          corporis, molestias fugit quia qui adipisci libero ad! Labore quis
-          fuga odio.
-        </p>
-      </PostCard>
+          <Markdown>{trimPostBody(post.body, 150)}</Markdown>
+        </PostCard>
+      ))}
     </FeedContainer>
   )
 }
