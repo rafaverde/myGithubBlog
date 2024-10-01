@@ -6,7 +6,7 @@ export interface Post {
   url: string
   title: string
   login: string
-  createdAt: string
+  created_at: string
   comments: number
   body: string
 }

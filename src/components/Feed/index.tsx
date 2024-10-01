@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom"
 
 import { FeedContainer, PostCard } from "./styles"
 import { BlogContext } from "../../contexts/BlogContext"
+
 import Markdown from "react-markdown"
+import { formatDistanceToNow } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 export function Feed() {
   const { posts } = useContext(BlogContext)
@@ -31,7 +34,12 @@ export function Feed() {
         >
           <header>
             <h1>{post.title}</h1>
-            <span>{post.createdAt}</span>
+            <span>
+              {formatDistanceToNow(post.created_at, {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+            </span>
           </header>
 
           <Markdown>{trimPostBody(post.body, 150)}</Markdown>

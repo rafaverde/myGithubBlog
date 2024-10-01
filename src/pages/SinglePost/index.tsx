@@ -2,16 +2,19 @@ import { NavLink, useParams } from "react-router-dom"
 
 import {
   ArrowSquareOut,
-  Calendar,
+  CalendarDots,
   CaretLeft,
   ChatCircle,
   GithubLogo,
 } from "@phosphor-icons/react"
 
 import { PostContainer, PostContent, PostHeader } from "./styles"
+
 import { api } from "../../lib/axios"
 import { useEffect, useState } from "react"
 import Markdown from "react-markdown"
+import { formatDistanceToNow } from "date-fns"
+import { ptBR } from "date-fns/locale/pt-BR"
 
 interface SinglePost {
   id: number
@@ -53,7 +56,7 @@ export function SinglePost() {
               </li>
             </NavLink>
             {singlePost?.html_url && (
-              <NavLink to={singlePost?.html_url} target="_blank">
+              <NavLink to={singlePost.html_url} target="_blank">
                 <li>
                   Ver no Github <ArrowSquareOut size={16} weight="bold" />
                 </li>
@@ -69,10 +72,15 @@ export function SinglePost() {
             <GithubLogo size={18} weight="fill" />
             {singlePost?.user.login}
           </li>
-          <li>
-            <Calendar size={18} weight="fill" />
-            {singlePost?.created_at}
-          </li>
+          {singlePost?.created_at && (
+            <li>
+              <CalendarDots size={18} weight="fill" />
+              {formatDistanceToNow(singlePost.created_at, {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+            </li>
+          )}
           <li>
             <ChatCircle size={18} weight="fill" />
             {singlePost?.comments}

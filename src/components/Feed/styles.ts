@@ -26,6 +26,8 @@ export const PostCard = styled.li`
 
   header {
     display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     margin-bottom: 1.25rem;
 
     h1 {
@@ -35,9 +37,12 @@ export const PostCard = styled.li`
 
     span {
       flex: 1;
-      text-align: right;
       font-size: 0.875rem;
       color: ${({ theme }) => theme.colors["base-span"]};
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 
