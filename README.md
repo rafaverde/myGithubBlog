@@ -2,6 +2,6 @@
 
 ### .
 
-# WIP: My Github Blog
+# My Github Blog
 
 A study project developed in the Rocketseat React course that fetches data from the GitHub API to serve a blog.
