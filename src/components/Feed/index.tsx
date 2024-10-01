@@ -21,7 +21,6 @@ export function Feed() {
   }
 
   function handlePostNavigate(issuNumber: number) {
-    console.log(issuNumber)
     navigate(`/post/${issuNumber}`)
   }
 

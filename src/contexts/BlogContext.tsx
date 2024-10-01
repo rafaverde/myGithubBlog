@@ -13,6 +13,7 @@ export interface Post {
 
 interface BlogContextType {
   posts: Post[]
+  fetchPosts: (query?: string) => Promise<void>
 }
 
 interface BlogProviderProps {
@@ -24,19 +25,25 @@ export const BlogContext = createContext({} as BlogContextType)
 export function BlogProvider({ children }: BlogProviderProps) {
   const [posts, setPosts] = useState<Post[]>([])
 
-  async function loadPosts() {
-    const { data } = await api.get(
-      "/search/issues?q=%20repo:rafaverde/myGithubBlog"
-    )
+  async function fetchPosts(query?: string) {
+    const { data } = await api.get("search/issues", {
+      params: {
+        q: query
+          ? `${query} repo:rafaverde/myGithubBlog`
+          : "repo:rafaverde/myGithubBlog",
+      },
+    })
 
     setPosts(data.items)
   }
 
   useEffect(() => {
-    loadPosts()
+    fetchPosts()
   }, [])
 
   return (
-    <BlogContext.Provider value={{ posts }}>{children}</BlogContext.Provider>
+    <BlogContext.Provider value={{ posts, fetchPosts }}>
+      {children}
+    </BlogContext.Provider>
   )
 }
