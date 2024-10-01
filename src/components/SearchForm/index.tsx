@@ -3,8 +3,8 @@ import * as z from "zod"
 
 import { SearchFormContainer } from "./styles"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useContext } from "react"
 import { BlogContext } from "../../contexts/BlogContext"
+import { useContextSelector } from "use-context-selector"
 
 const searchFormSchema = z.object({
   query: z.string(),
@@ -13,7 +13,9 @@ const searchFormSchema = z.object({
 type SearchFormInputs = z.infer<typeof searchFormSchema>
 
 export function SearchForm() {
-  const { fetchPosts } = useContext(BlogContext)
+  const fetchPosts = useContextSelector(BlogContext, (context) => {
+    return context.fetchPosts
+  })
 
   const {
     register,

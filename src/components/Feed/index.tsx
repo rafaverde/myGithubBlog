@@ -1,4 +1,3 @@
-import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { FeedContainer, PostCard } from "./styles"
@@ -7,9 +6,13 @@ import { BlogContext } from "../../contexts/BlogContext"
 import Markdown from "react-markdown"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import { useContextSelector } from "use-context-selector"
 
 export function Feed() {
-  const { posts } = useContext(BlogContext)
+  const posts = useContextSelector(BlogContext, (context) => {
+    return context.posts
+  })
+
   const navigate = useNavigate()
 
   function trimPostBody(str: string, limit: number) {

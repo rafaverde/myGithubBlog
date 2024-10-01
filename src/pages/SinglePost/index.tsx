@@ -11,7 +11,7 @@ import {
 import { PostContainer, PostContent, PostHeader } from "./styles"
 
 import { api } from "../../lib/axios"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Markdown from "react-markdown"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale/pt-BR"
@@ -32,17 +32,17 @@ export function SinglePost() {
   const { issueNumber } = useParams()
   const [singlePost, setSinglePost] = useState<SinglePost>()
 
-  async function fetchPost() {
+  const fetchPost = useCallback(async () => {
     const { data } = await api.get(
       `/repos/rafaverde/mygithubblog/issues/${issueNumber}`
     )
 
     setSinglePost(data)
-  }
+  }, [issueNumber])
 
   useEffect(() => {
     fetchPost()
-  }, [])
+  }, [fetchPost])
 
   return (
     <PostContainer>

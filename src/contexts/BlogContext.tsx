@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useEffect, useState } from "react"
+import { ReactNode, useCallback, useEffect, useState } from "react"
 import { api } from "../lib/axios"
+import { createContext } from "use-context-selector"
 
 export interface Post {
   number: number
@@ -25,7 +26,7 @@ export const BlogContext = createContext({} as BlogContextType)
 export function BlogProvider({ children }: BlogProviderProps) {
   const [posts, setPosts] = useState<Post[]>([])
 
-  async function fetchPosts(query?: string) {
+  const fetchPosts = useCallback(async (query?: string) => {
     const { data } = await api.get("search/issues", {
       params: {
         q: query
@@ -35,11 +36,11 @@ export function BlogProvider({ children }: BlogProviderProps) {
     })
 
     setPosts(data.items)
-  }
+  }, [])
 
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [fetchPosts])
 
   return (
     <BlogContext.Provider value={{ posts, fetchPosts }}>
