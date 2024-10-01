@@ -64,4 +64,18 @@ export const PostContent = styled.article`
     margin-top: 1.5rem;
     background-color: ${({ theme }) => theme.colors["base-post"]};
   }
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  pre {
+    font-size: small;
+    overflow-x: scroll;
+    line-height: 1.6;
+    padding: 2rem;
+    margin-bottom: 1rem;
+
+    background-color: ${({ theme }) => theme.colors["base-post"]};
+  }
 `

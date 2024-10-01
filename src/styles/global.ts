@@ -17,4 +17,8 @@ export const GlobalStyle = createGlobalStyle`
   body, button, textarea, input {
     font: 400 1rem ${({ theme }) => theme.fonts.primary};
   }
+
+  a {
+    text-decoration: none;
+  }
 `

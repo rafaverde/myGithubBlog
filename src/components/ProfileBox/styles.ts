@@ -39,6 +39,11 @@ export const InfoContainer = styled.div`
     line-height: 0;
 
     color: ${({ theme }) => theme.colors.primary};
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
+    }
   }
 
   ul {

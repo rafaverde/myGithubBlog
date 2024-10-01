@@ -1,11 +1,11 @@
 import { createContext, ReactNode, useEffect, useState } from "react"
 import { api } from "../lib/axios"
 
-interface Post {
+export interface Post {
   number: number
   url: string
   title: string
-  userLogin: string
+  login: string
   createdAt: string
   comments: number
   body: string

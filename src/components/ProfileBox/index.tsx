@@ -7,6 +7,7 @@ import {
   GithubLogo,
   Users,
 } from "@phosphor-icons/react"
+import { NavLink } from "react-router-dom"
 
 interface User {
   id: number
@@ -45,9 +46,13 @@ export function ProfileBox() {
     <ProfileContainer>
       <img src={user?.avatar_url} alt="" />
       <InfoContainer>
-        <span>
-          Github <ArrowSquareOut size={16} weight="bold" />
-        </span>
+        {user?.html_url && (
+          <NavLink to={user?.html_url} target="_blank">
+            <span>
+              Github <ArrowSquareOut size={16} weight="bold" />
+            </span>
+          </NavLink>
+        )}
         <h2>{user?.name}</h2>
         <p>{user?.bio}</p>
 

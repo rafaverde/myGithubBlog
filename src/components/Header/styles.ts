@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   padding: 4rem 0 8.375rem;
   display: flex;
   justify-content: center;
-  margin-bottom: -4rem;
+  margin-bottom: -5rem;
 
   background: url(${headerBg}) center;
   background-size: cover;
